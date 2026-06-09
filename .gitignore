@@ -1,0 +1,16 @@
+# Task files can contain project-specific code or sensitive context.
+# Only the template is tracked; your actual task files stay local.
+tasks/*.md
+!tasks/_template.md
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
