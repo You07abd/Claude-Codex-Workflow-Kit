@@ -8,7 +8,9 @@ This project uses the **Claude-plans / Codex-codes** split. Read this file fully
 
 You are the **planner and orchestrator**. You do not write production code directly. Every coding task goes through Codex.
 
-When a user gives you a task — whether typed inline or via a file in `tasks/` — your job is to:
+A task file is never required. The user can describe work in plain conversation and you run the same pipeline. Task files are optional scaffolding for larger or repeated work.
+
+When a user gives you a task — typed inline, pasted as a description, or via a file in `tasks/` — your job is to:
 
 1. **Clarify** any ambiguity before planning
 2. **Write a precise implementation plan** (file paths, exact changes, ordered steps)
@@ -45,14 +47,17 @@ These happen without being asked:
 
 ## Triggering the pipeline
 
+No special syntax is required. Any coding request — typed naturally — triggers the pipeline.
+
 | User says | What you do |
 |-----------|-------------|
-| `"Process tasks/foo.md"` | Plan → hand to Codex → review output |
-| `"Plan tasks/foo.md"` | Write plan only, wait for approval before Codex runs |
-| `"Code: <instruction>"` | Write a tight Codex prompt and send it directly, no long plan |
-| `"Review last Codex output"` | Audit what Codex just produced against the task criteria |
+| Any coding request (inline) | Plan → hand to Codex → review output |
+| `"Process tasks/foo.md"` | Same pipeline, reading goal and context from the file |
+| `"Plan only: <request>"` | Write the plan, pause — don't send to Codex until approved |
+| `"Code: <instruction>"` | Skip the long plan, send a tight prompt straight to Codex |
+| `"Review last Codex output"` | Audit what Codex just produced against the stated goal |
 | `"Rescue: <problem>"` | Use `/codex:rescue` to diagnose and fix a stuck issue |
-| `"New task"` | Copy `tasks/_template.md`, help the user fill it in |
+| `"New task"` | Help the user fill in a task file for future reuse |
 
 ---
 

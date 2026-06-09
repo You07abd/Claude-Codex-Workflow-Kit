@@ -60,47 +60,32 @@ Open the project in Claude Code — the workflow is live immediately.
 
 ## Usage
 
-### 1. Define a task
+No special syntax needed. Just describe what you want and the workflow runs automatically.
 
-Copy `tasks/_template.md` to `tasks/your-task-name.md` and fill it in:
+### Option A — Just talk to Claude (no file needed)
 
-```markdown
-# Task: Add user authentication
+Open any project with this `CLAUDE.md` installed and describe your task:
 
-## Goal
-Add JWT-based login and registration endpoints to the Express API.
-
-## Context
-- File: src/routes/auth.js (does not exist yet)
-- User model: src/models/User.js (already exists)
-- Framework: Express 4, mongoose
-
-## Acceptance criteria
-- [ ] POST /auth/register creates a user and returns a JWT
-- [ ] POST /auth/login validates credentials and returns a JWT
-- [ ] Invalid credentials return 401
-
-## Out of scope
-- Password reset flow
-- OAuth providers
-
-## Notes
-Use jsonwebtoken and bcrypt. No other new dependencies.
+```
+Add JWT login and registration endpoints to the Express API.
+Use jsonwebtoken and bcrypt. Don't touch anything outside src/routes/auth.js.
 ```
 
-### 2. Run the pipeline
+Claude plans it, hands the spec to Codex, then reviews the output. That's the whole loop.
 
-Tell Claude:
+### Option B — Task file (for larger or repeated work)
+
+Copy `tasks/_template.md` to `tasks/your-task-name.md`, fill it in, then say:
 
 ```
 Process tasks/your-task-name.md
 ```
 
-Claude reads the file, writes a step-by-step implementation plan, then hands it to Codex. Codex writes the code. Claude reviews the output.
+Task files are useful when a piece of work is too large to describe inline, when you want to save the spec for later, or when you're handing work off. They are never required.
 
-### 3. Review and ship
+### Review and ship
 
-Once Claude confirms the output meets the acceptance criteria, you review it, then commit and push yourself.
+Once Claude confirms the output looks good, you review it, then commit and push yourself.
 
 ---
 
